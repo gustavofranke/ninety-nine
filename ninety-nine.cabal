@@ -23,6 +23,7 @@ library
   ghc-options:         -Wall
   exposed-modules:     Lists1
                      , Lists2
+                     , Lists3
   build-depends:       base >= 4.7 && <5
                      , random
   hs-source-dirs:      src/Problems
