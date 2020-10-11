@@ -162,8 +162,7 @@ compress x = reverse $ foldl (\a b -> if (head a) == b then a else b:a) [head x]
 -- ((A A A A) (B) (C C) (A A) (D) (E E E E))
 -- Example in Haskell:
 
--- λ> pack ['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a', 
---              'a', 'd', 'e', 'e', 'e', 'e']
+-- λ> pack ['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a', 'a', 'd', 'e', 'e', 'e', 'e']
 -- ["aaaa","b","cc","aa","d","eeee"]
 pack :: Eq a => [a] -> [[a]]
 pack [] = []
