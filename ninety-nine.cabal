@@ -29,3 +29,13 @@ library
                      , random
   hs-source-dirs:      src
   default-language:    Haskell2010
+
+test-suite test
+  ghc-options:         -Wall
+  type:                exitcode-stdio-1.0
+  main-is:             Tests.hs
+  hs-source-dirs:      test
+  build-depends:       base
+                     , hspec
+                     , ninety-nine
+  default-language:    Haskell2010
