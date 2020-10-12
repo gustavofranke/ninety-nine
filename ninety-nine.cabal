@@ -2,7 +2,7 @@ name:                ninety-nine
 version:             0.1.0.0
 -- synopsis:
 -- description:
-homepage:            https://github.com/githubuser/ninety-nine#readme
+homepage:            https://github.com/gustavofranke/ninety-nine#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Gustavo Franke
@@ -25,6 +25,7 @@ library
                      , Lists2
                      , Lists3
                      , Arithmetic
+                     , Logic
   build-depends:       base >= 4.7 && <5
                      , random
   hs-source-dirs:      src
@@ -43,4 +44,5 @@ test-suite test
                      , List2Spec
                      , List3Spec
                      , ArithmeticSpec
+                     , LogicSpec
   build-tool-depends: hspec-discover:hspec-discover == 2.*
