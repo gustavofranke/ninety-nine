@@ -20,3 +20,44 @@ spec = do
       myGCD 36 63     `shouldBe` 9
       -- myGCD (-3) (-6) `shouldBe` 3
       myGCD (-3) 6    `shouldBe` 3
+
+  describe "Problem 33" $ do
+
+    it "can coprime" $ do
+      coprime 35 64 `shouldBe` True
+
+  describe "Problem 34" $ do
+
+    it "can totient 10" $ do
+      totient 10 `shouldBe` 4
+      totient 1009 `shouldBe` 1008
+
+  describe "Problem 35" $ do
+
+    it "can primeFactors 315" $ do
+      primeFactors 315 `shouldBe` [3, 3, 5, 7]
+
+  describe "Problem 36" $ do
+
+    it "can primeFactorsMult 315" $ do
+      primeFactorsMult 315 `shouldBe` [(3,2),(5,1),(7,1)]
+
+  describe "Problem 37" $ do
+
+    it "can phi 10090" $ do
+      phi 10090 `shouldBe` 1008
+
+  describe "Problem 39" $ do
+
+    it "can primesR 10 20" $ do
+      primesR 10 20 `shouldBe` [11,13,17,19]
+
+  describe "Problem 40" $ do
+
+    it "can goldbach 28" $ do
+      goldbach 28 `shouldBe` (5, 23)
+
+--   describe "Problem 41" $ do
+
+--     it "can goldbachList" $ do
+--       goldbachList 9 20 `shouldBe` [(3,7),(5,7),(3,11),(3,13),(5,13),(3,17)]
