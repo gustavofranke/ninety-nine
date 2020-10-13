@@ -18,7 +18,7 @@ import Lists1
 
 -- λ> encodeModified "aaaabccaadeeee"
 -- [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e']
-data EncodeModified a = Multiple Int a | Single a deriving Show
+data EncodeModified a = Multiple Int a | Single a deriving (Eq, Show)
 encodeModified :: Eq a => [a] -> [EncodeModified a]
 encodeModified x = map (func) (encode x)
     where func t = if fst t == 1 then Single (snd t) else Multiple (fst t) (snd t)
@@ -31,8 +31,7 @@ encodeModified x = map (func) (encode x)
 
 -- Example in Haskell:
 
--- λ> decodeModified 
---        [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e']
+-- λ> decodeModified [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e']
 -- "aaaabccaadeeee"
 decodeModified :: Eq a => [EncodeModified a] -> [a]
 decodeModified []        = []

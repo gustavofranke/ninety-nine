@@ -5,10 +5,15 @@ import Test.Hspec
 
 spec :: Spec
 spec = do
-  -- describe "Problem 11" $ do
+  describe "Problem 11" $ do
 
-  --   it "can compress \"aaaabccaadeeee\"" $ do
-  --     encodeModified "aaaabccaadeeee" `shouldBe` [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e']
+    it "can compress \"aaaabccaadeeee\"" $ do
+      encodeModified "aaaabccaadeeee" `shouldBe` [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e']
+
+  describe "Problem 12" $ do
+
+    it "can decodeModified" $ do
+      decodeModified [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e'] `shouldBe` "aaaabccaadeeee"
 
   describe "Problem 14" $ do
 
@@ -25,10 +30,10 @@ spec = do
     it "can dropEvery \"abcdefghik\" 3" $ do
       dropEvery "abcdefghik" 3 `shouldBe` "abdeghk"
 
-  -- describe "Problem 17" $ do
+  describe "Problem 17" $ do
 
-  --   it "can split \"abcdefghik\" 3" $ do
-  --     dropEvery "abcdefghik" 3 `shouldBe` ("abc", "defghik")
+    it "can split \"abcdefghik\" 3" $ do
+      split "abcdefghik" 3 `shouldBe` ("abc", "defghik")
 
   describe "Problem 18" $ do
 
