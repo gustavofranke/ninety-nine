@@ -2,6 +2,7 @@ module List3Spec where
 
 import Lists3
 import Test.Hspec
+import qualified Data.Set as Set
 
 spec :: Spec
 spec = do
@@ -15,20 +16,27 @@ spec = do
     it "can range 4 9" $ do
       range 4 9 `shouldBe` [4,5,6,7,8,9]
 
-  -- describe "Problem 23" $ do
+  describe "Problem 23" $ do
 
-  --   it "can rndSelect \"abcdefgh\" 3" $ do
-  --     rndSelect "abcdefgh" 3 `shouldBe` "eda"
+    it "can rndSelect \"abcdefgh\" 3" $ do
+      let list = "abcdefgh"
+      let obtained = Set.fromList $ rndSelect list 3
+      let expected = (Set.fromList list) `Set.intersection` obtained
+      obtained `shouldBe` expected
 
-  -- describe "Problem 24" $ do
+  describe "Problem 24" $ do
 
-  --   it "can diffSelect 6 49" $ do
-  --     diffSelect 6 49 `shouldBe` [23,1,17,33,21,37]
+    it "can diffSelect 6 49" $ do
+      let first  = 6
+      let second = 49
+      length (diffSelect first second) `shouldBe` first
+      -- max (diffSelect first second) `shouldSatisfy` (second <=)
+      -- min (diffSelect first second) `shouldSatisfy` (>= 1)
 
-  -- describe "Problem 25" $ do
+  describe "Problem 25" $ do
 
-  --   it "can rndPermu \"abcdef\"" $ do
-  --     rndPermu "abcdef" `shouldBe` "badcef"
+    it "can rndPermu \"abcdef\"" $ do
+      (Set.fromList $ rndPermu "abcdef") `shouldBe` Set.fromList "abcdef"
 
   -- describe "Problem 28" $ do
 
