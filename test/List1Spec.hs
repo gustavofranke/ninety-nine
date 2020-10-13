@@ -12,7 +12,14 @@ spec = do
 
     it "can myLast ['x','y','z']" $ do
       myLast ['x','y','z'] `shouldBe` 'z'     
-  
+
+  describe "Problem 2" $ do
+
+    it "can myButLast [1,2,3,4]" $ do
+      myButLast [1,2,3,4] `shouldBe` (3 :: Int)    
+
+    it "can myLmyButLastast ['x','y','z']" $ do
+      myButLast ['x','y','z'] `shouldBe` 'y'   
   describe "Problem 3" $ do
 
     it "can elementAt [1,2,3] 2" $ do
@@ -21,13 +28,26 @@ spec = do
     it "can elementAt \"haskell\" 5" $ do
       elementAt "haskell" 5 `shouldBe` 'e'        
 
-  -- describe "Problem 4" $ do
+  describe "Problem 4" $ do
 
-  --   it "can myLength [123, 456, 789]" $ do
-  --     myLength [123, 456, 789] `shouldBe` 3
+    it "can myLength [123, 456, 789]" $ do
+      myLength [123 :: Int, 456, 789] `shouldBe` 3
 
-  --   it "can myLength \"Hello, world!\"" $ do
-  --     myLength "Hello, world!" `shouldBe` 13
+    it "can myLength \"Hello, world!\"" $ do
+      myLength "Hello, world!" `shouldBe` 13
+
+  describe "Problem 5" $ do
+
+    it "can myReverse" $ do
+      myReverse "A man, a plan, a canal, panama!" `shouldBe` "!amanap ,lanac a ,nalp a ,nam A"
+      myReverse [1,2,3,4] `shouldBe` ([4,3,2,1]::[Int])
+
+  describe "Problem 6" $ do
+
+    it "can isPalindrome" $ do
+      isPalindrome [1::Int,2,3] `shouldBe` False
+      isPalindrome "madamimadam" `shouldBe` True
+      isPalindrome [1::Int,2,4,8,16,8,4,2,1] `shouldBe` True
 
   describe "Problem 7" $ do
 
@@ -37,8 +57,8 @@ spec = do
     it "can flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])" $ do
       flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]]) `shouldBe` ([1,2,3,4,5] :: [Int])    
 
-    -- it "can flatten (List [])" $ do
-    --   flatten (List []) `shouldBe` [] 
+    it "can flatten (List [])" $ do
+      flatten (List []) `shouldBe` ([] :: [Int])
 
   describe "Problem 8" $ do
 

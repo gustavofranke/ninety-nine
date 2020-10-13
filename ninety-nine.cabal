@@ -38,6 +38,7 @@ test-suite test
   main-is:             Tests.hs
   hs-source-dirs:      test
   build-depends:       base
+                     , containers
                      , hspec
                      , ninety-nine
   default-language:    Haskell2010

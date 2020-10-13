@@ -64,11 +64,8 @@ elementAt as i = fst $ last $ zip as [1..i]
 -- λ> myLength "Hello, world!"
 -- 13
 -- -----
--- *Main> sum $ map (\_ -> 1) "haskell"
--- 7
--- *Main> sum $ map (\_ -> 1) [123, 456, 789]
--- 3
--- *Main> sum $ map (\_ -> 1) "Hello, world!"
+myLength :: [a] -> Int
+myLength = sum . map (\_ -> 1)
 
 -- Problem 5
 -- (*) Reverse a list.
@@ -79,15 +76,8 @@ elementAt as i = fst $ last $ zip as [1..i]
 -- "!amanap ,lanac a ,nalp a ,nam A"
 -- λ> myReverse [1,2,3,4]
 -- [4,3,2,1]
--- ----
--- scala> (1 to 10).toList.foldRight(List[Int]())((a,b) => b:+a)
--- res4: List[Int] = List(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
-
--- scala> (1 to 10).toList.foldLeft(List[Int]())((a,b) => b::a)
--- res5: List[Int] = List(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
-
--- foldl (\a b -> b:a) [] [1..10]
--- [10,9,8,7,6,5,4,3,2,1]
+myReverse :: [a] -> [a]
+myReverse = foldl (\a b -> b:a) []
 
 -- Problem 6
 -- (*) Find out whether a list is a palindrome. A palindrome can be read forward or backward; e.g. (x a m a x).
@@ -100,15 +90,8 @@ elementAt as i = fst $ last $ zip as [1..i]
 -- True
 -- λ> isPalindrome [1,2,4,8,16,8,4,2,1]
 -- True
--- ---------
--- *Main Data.Tuple> let isPalindrome = \xs -> if xs == reverse xs then True else False
--- *Main Data.Tuple> isPalindrome [1,2,3]
--- False
--- *Main Data.Tuple> isPalindrome "madamimadam"
--- True
--- *Main Data.Tuple> isPalindrome [1,2,4,8,16,8,4,2,1]
--- True
-
+isPalindrome :: Eq a => [a] -> Bool
+isPalindrome xs = if xs == reverse xs then True else False
 
 -- Problem 7
 -- (**) Flatten a nested list structure.
