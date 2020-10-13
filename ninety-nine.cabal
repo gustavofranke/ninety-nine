@@ -26,6 +26,7 @@ library
                      , Lists3
                      , Arithmetic
                      , Logic
+                     , BTrees1
   build-depends:       base >= 4.7 && <5
                      , random
   hs-source-dirs:      src
@@ -45,4 +46,5 @@ test-suite test
                      , List3Spec
                      , ArithmeticSpec
                      , LogicSpec
+                     , BTrees1Spec
   build-tool-depends: hspec-discover:hspec-discover == 2.*
