@@ -19,3 +19,4 @@ cabal.sandbox.config
 *.iml
 .idea/
 *.lock
+report.html
