@@ -15,6 +15,11 @@ spec = do
     it "can decodeModified" $ do
       decodeModified [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e'] `shouldBe` "aaaabccaadeeee"
 
+  describe "Problem 13" $ do
+
+    it "can encodeDirect" $ do
+      encodeDirect "aaaabccaadeeee" `shouldBe` [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e']
+
   describe "Problem 14" $ do
 
     it "can dupli [1, 2, 3]" $ do
