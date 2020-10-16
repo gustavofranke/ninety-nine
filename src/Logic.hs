@@ -56,7 +56,7 @@ xor' a b
   | otherwise = True
 
 impl' :: Bool -> Bool -> Bool
-impl' p q = or' (not' p) q
+impl' p = or' (not' p)
 
 equ' :: Bool -> Bool -> Bool
 equ' a b
@@ -64,7 +64,7 @@ equ' a b
   | otherwise = False
 
 table :: (Bool -> Bool -> Bool) -> [[Bool]]
-table f = map (\x -> (fst x) : (snd x) : f (fst x) (snd x) : []) inputs
+table f = map (\x -> fst x : snd x : uncurry f x : []) inputs -- uncurry f x == f (fst x) (snd x)
   where
     inputs = [(True, True), (True, False), (False, True), (False, False)]
 
@@ -229,8 +229,8 @@ gray n = reverse $ transpose (map (\x -> take (2 ^ n) (cycle (trues x ++ falses 
   where
     colums = [1 .. n]
     bools = \x -> replicate ((2 ^ x) `div` 2)
-    trues = \x -> bools x '1'
-    falses = \x -> bools x '0'
+    trues = (`bools` '1')
+    falses = (`bools` '0')
 
 -- |
 -- Problem 50

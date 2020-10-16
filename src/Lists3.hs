@@ -19,7 +19,7 @@ import System.Random
 -- >>> insertAt 'X' "abcd" 2
 -- "aXbcd"
 insertAt :: a -> [a] -> Int -> [a]
-insertAt e xs i = (take (i - 1) xs) ++ e : (drop (i - 1) xs)
+insertAt e xs i = take (i - 1) xs ++ e : drop (i - 1) xs
 
 -- |
 -- Problem 22
@@ -188,7 +188,7 @@ rndPermu xs = map (\f -> xs !! (f - 1)) func
 -- >>> lfsort ["abc", "de", "fgh", "de", "ijkl", "mn", "o"]
 -- ["ijkl","o","abc","fgh","de","de","mn"]
 lsort :: [[a]] -> [[a]]
-lsort xxs = map (fst) $ sortBy (sortTuple) $ map (\xs -> (xs, length xs)) xxs
+lsort xxs = map fst $ sortBy sortTuple $ map (\xs -> (xs, length xs)) xxs
   where
     sortTuple (a1, b1) (a2, b2)
       | b1 > b2 = GT
@@ -198,8 +198,8 @@ lsort xxs = map (fst) $ sortBy (sortTuple) $ map (\xs -> (xs, length xs)) xxs
 lsort' xxs = sortBy (sortFun) xxs
   where
     sortFun a1 a2
-      | (length a1) > (length a2) = GT
-      | (length a1) < (length a2) = LT
-      | (length a1) == (length a2) = EQ
+      | length a1 > length a2 = GT
+      | length a1 < length a2 = LT
+      | length a1 == length a2 = EQ
 
 --  lfsort :: [[a]] -> [[a]]

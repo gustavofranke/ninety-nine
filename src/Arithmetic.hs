@@ -184,7 +184,7 @@ phi m = foldl (\b a -> (fst a - 1) * (fst a) ^ (((snd a) - 1) * b)) 1 (primeFact
 -- >>> primesR 10 20
 -- [11,13,17,19]
 primesR :: Int -> Int -> [Int]
-primesR l u = filter (isPrime) [l .. u]
+primesR l u = filter isPrime [l .. u]
 
 -- |
 -- Problem 40
@@ -244,4 +244,4 @@ goldbach x = (smaPrime, bigPrime)
 -- >>> goldbachList' 4 2000 50
 -- [(73,919),(61,1321),(67,1789),(61,1867)]
 goldbachList :: Int -> Int -> [(Int, Int)]
-goldbachList l u = map (goldbach) $ filter (even) [l .. u]
+goldbachList l u = map goldbach $ filter even [l .. u]

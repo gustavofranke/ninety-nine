@@ -104,7 +104,7 @@ myReverse = foldl (\a b -> b : a) []
 -- >>> isPalindrome [1,2,4,8,16,8,4,2,1]
 -- True
 isPalindrome :: Eq a => [a] -> Bool
-isPalindrome xs = if xs == reverse xs then True else False
+isPalindrome xs = xs == reverse xs
 
 -- |
 -- Problem 7

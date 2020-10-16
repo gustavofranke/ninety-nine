@@ -76,7 +76,7 @@ stringToTree (c1 : c2 : cs) = go (c1 : c2 : cs) (Node c1 [])
   where
     go (c1 : c2 : cs) t@(Node n es)
       | c1 == '^' && c2 /= '^' = stringToTree (c2 : cs)
-      | c1 == '^' && c2 == '^' = stringToTree (cs)
+      | c1 == '^' && c2 == '^' = stringToTree cs
       | c1 /= '^' && c2 == '^' = Node c1 []
       | c1 /= '^' && c2 /= '^' = Node c1 [stringToTree (c2 : cs)]
 

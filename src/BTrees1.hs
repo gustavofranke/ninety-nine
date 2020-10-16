@@ -244,7 +244,7 @@ insert' x (Branch b left right)
   | x > b = Branch b left (insert' x right)
 
 construct :: [Int] -> Tree Int
-construct xs = foldl (\b a -> insert' a b) Empty xs
+construct = foldl (\b a -> insert' a b) Empty
 
 -- |
 -- Problem 58
