@@ -41,8 +41,8 @@ encodeModified x = map func (encode x)
 -- "aaaabccaadeeee"
 decodeModified :: Eq a => [EncodeModified a] -> [a]
 decodeModified [] = []
-decodeModified ((Single x) : xs) = x : (decodeModified xs)
-decodeModified ((Multiple i x) : xs) = (replicate i x) ++ (decodeModified xs)
+decodeModified ((Single x) : xs) = x : decodeModified xs
+decodeModified ((Multiple i x) : xs) = replicate i x ++ decodeModified xs
 
 -- |
 -- Problem 13

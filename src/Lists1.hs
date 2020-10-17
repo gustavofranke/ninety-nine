@@ -73,7 +73,7 @@ elementAt as i = fst $ last $ zip as [1 .. i]
 -- >>> myLength "Hello, world!"
 -- 13
 myLength :: [a] -> Int
-myLength = sum . map (\_ -> 1)
+myLength = sum . map (const 1)
 
 -- |
 -- Problem 5
@@ -87,7 +87,7 @@ myLength = sum . map (\_ -> 1)
 -- >>> myReverse [1,2,3,4]
 -- [4,3,2,1]
 myReverse :: [a] -> [a]
-myReverse = foldl (\a b -> b : a) []
+myReverse = foldl (flip (:)) []
 
 -- |
 -- Problem 6
@@ -152,7 +152,7 @@ flatten (List (l : ls)) = flatten l ++ flatten (List ls)
 -- >>> compress "aaaabccaadeeee"
 -- "abcade"
 compress :: Eq a => [a] -> [a]
-compress x = reverse $ foldl (\a b -> if (head a) == b then a else b : a) [head x] x
+compress x = reverse $ foldl (\a b -> if head a == b then a else b : a) [head x] x
 
 -- |
 -- Problem 9
@@ -172,10 +172,10 @@ compress x = reverse $ foldl (\a b -> if (head a) == b then a else b : a) [head 
 pack :: Eq a => [a] -> [[a]]
 pack [] = []
 -- pack x = takeWhile (\e -> e == (head x)) x : (pack $ dropWhile (\e -> e == (head x)) x)
-pack x = takeWhile cond x : (pack $ dropWhile cond x)
+pack x = takeWhile cond x : pack (dropWhile cond x)
   where
     -- where cond = (\e -> e == (head x))
-    cond = (== (head x))
+    cond = (== head x)
 
 -- |
 -- Problem 10
@@ -192,4 +192,4 @@ pack x = takeWhile cond x : (pack $ dropWhile cond x)
 -- >>> encode "aaaabccaadeeee"
 -- [(4,'a'),(1,'b'),(2,'c'),(2,'a'),(1,'d'),(4,'e')]
 encode :: Eq a => [a] -> [(Int, a)]
-encode x = map (\p -> ((length p), (head p))) (pack x)
+encode x = map (\p -> (length p, head p)) (pack x)

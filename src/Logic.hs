@@ -64,7 +64,7 @@ equ' a b
   | otherwise = False
 
 table :: (Bool -> Bool -> Bool) -> [[Bool]]
-table f = map (\x -> fst x : snd x : uncurry f x : []) inputs -- uncurry f x == f (fst x) (snd x)
+table f = map (\x -> [fst x, snd x, uncurry f x]) inputs -- uncurry f x == f (fst x) (snd x)
   where
     inputs = [(True, True), (True, False), (False, True), (False, False)]
 
@@ -149,8 +149,8 @@ tablen n f = map (\i -> i ++ [f i]) inputs
   where
     colums = [1 .. n]
     bools = \x -> replicate ((2 ^ x) `div` 2)
-    trues = \x -> bools x True
-    falses = \x -> bools x False
+    trues = (`bools` True)
+    falses = (`bools` False)
     --   inputs = transpose (map (\xs -> take (2 ^ n) (cycle xs)) (map (\x -> trues x ++ falses x) $ reverse colums))
     inputs = transpose (map (\x -> take (2 ^ n) (cycle (trues x ++ falses x))) $ reverse colums)
 

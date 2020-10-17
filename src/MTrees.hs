@@ -51,8 +51,8 @@ mtree5 =
 -- 2
 nnodes :: MTree a -> Int
 nnodes (Node _ []) = 1
-nnodes (Node _ (x : [])) = 1 + (nnodes x)
-nnodes (Node _ (x : xs)) = 1 + (nnodes x) + sum (map nnodes xs)
+nnodes (Node _ [x]) = 1 + nnodes x
+nnodes (Node _ (x : xs)) = 1 + nnodes x + sum (map nnodes xs)
 
 -- |
 -- Problem 70
@@ -83,6 +83,6 @@ stringToTree (c1 : c2 : cs) = go (c1 : c2 : cs) (Node c1 [])
 -- >>> treeToString (Node 'a' [Node 'f' [Node 'g' []],Node 'c' [],Node 'b' [Node 'd' [],Node 'e' []]])
 -- "afg^^c^bd^e^^^"
 treeToString :: MTree Char -> String
-treeToString (Node c []) = c : '^' : []
-treeToString (Node c (x : [])) = c : (treeToString x) ++ ['^']
-treeToString (Node c (x : xs)) = c : (treeToString x) ++ (xs >>= treeToString) ++ ['^']
+treeToString (Node c []) = [c, '^']
+treeToString (Node c [x]) = c : treeToString x ++ ['^']
+treeToString (Node c (x : xs)) = c : treeToString x ++ (xs >>= treeToString) ++ ['^']

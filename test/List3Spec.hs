@@ -18,7 +18,7 @@ spec = do
     it "can rndSelect \"abcdefgh\" 3" $ do
       let list = "abcdefgh"
       let obtained = Set.fromList $ rndSelect list 3
-      let expected = (Set.fromList list) `Set.intersection` obtained
+      let expected = Set.fromList list `Set.intersection` obtained
       obtained `shouldBe` expected
 
   describe "Problem 24" $ do
@@ -31,7 +31,7 @@ spec = do
 
   describe "Problem 25" $ do
     it "can rndPermu \"abcdef\"" $ do
-      (Set.fromList $ rndPermu "abcdef") `shouldBe` Set.fromList "abcdef"
+      Set.fromList (rndPermu "abcdef") `shouldBe` Set.fromList "abcdef"
 
 -- describe "Problem 28" $ do
 

@@ -19,7 +19,7 @@ import Data.List
 isPrime :: Int -> Bool
 isPrime n
   | n <= 1 = False
-  | n /= 2 && n `mod` 2 == 0 = False
+  | n /= 2 && even n = False
   | n /= 3 && n `mod` 3 == 0 = False
   | n /= 5 && n `mod` 5 == 0 = False
   | n /= 7 && n `mod` 7 == 0 = False
@@ -131,7 +131,7 @@ primeFactors x
 -- >>> primeFactorsMult 315
 -- [(3,2),(5,1),(7,1)]
 primeFactorsMult :: Int -> [(Int, Int)]
-primeFactorsMult x = map (\f -> (head f, length f)) $ groupBy (==) (primeFactors x)
+primeFactorsMult x = map (\f -> (head f, length f)) $ group (primeFactors x)
 
 -- |
 -- Problem 37
@@ -151,7 +151,7 @@ primeFactorsMult x = map (\f -> (head f, length f)) $ groupBy (==) (primeFactors
 --          (p3 - 1) * p3 ** (m3 - 1) * ...
 -- Note that a ** b stands for the b'th power of a.
 phi :: Int -> Int
-phi m = foldl (\b a -> (fst a - 1) * (fst a) ^ (((snd a) - 1) * b)) 1 (primeFactorsMult m)
+phi m = foldl (\b a -> (fst a - 1) * fst a ^ ((snd a - 1) * b)) 1 (primeFactorsMult m)
 
 -- |
 -- Problem 38
@@ -211,7 +211,7 @@ goldbach :: Int -> (Int, Int)
 goldbach x = (smaPrime, bigPrime)
   where
     list = primesR 1 x
-    bigPrime = last $ list
+    bigPrime = last list
     smaPrime = x - bigPrime
 
 -- |

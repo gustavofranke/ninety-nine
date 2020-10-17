@@ -196,7 +196,7 @@ mirror :: Tree a -> Tree a -> Bool
 mirror Empty Empty = True
 mirror _ Empty = False
 mirror Empty _ = False
-mirror (Branch x leftx rightx) (Branch y lefty righty) = (mirror leftx righty) && (mirror lefty rightx)
+mirror (Branch x leftx rightx) (Branch y lefty righty) = mirror leftx righty && mirror lefty rightx
 
 symmetric :: Tree a -> Bool
 symmetric Empty = True
@@ -244,7 +244,7 @@ insert' x (Branch b left right)
   | x > b = Branch b left (insert' x right)
 
 construct :: [Int] -> Tree Int
-construct = foldl (\b a -> insert' a b) Empty
+construct = foldl (flip insert') Empty
 
 -- |
 -- Problem 58

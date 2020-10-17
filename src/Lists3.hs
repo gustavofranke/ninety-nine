@@ -195,7 +195,7 @@ lsort xxs = map fst $ sortBy sortTuple $ map (\xs -> (xs, length xs)) xxs
       | b1 < b2 = LT
       | b1 == b2 = EQ
 
-lsort' xxs = sortBy (sortFun) xxs
+lsort' xxs = sortBy sortFun xxs
   where
     sortFun a1 a2
       | length a1 > length a2 = GT

@@ -19,7 +19,7 @@ import BTrees1
 countLeaves :: Tree a -> Int
 countLeaves Empty = 0
 countLeaves (Branch _ Empty Empty) = 1
-countLeaves (Branch x left right) = (countLeaves left) + (countLeaves right)
+countLeaves (Branch x left right) = countLeaves left + countLeaves right
 
 -- |
 -- Problem 61A
@@ -37,7 +37,7 @@ countLeaves (Branch x left right) = (countLeaves left) + (countLeaves right)
 leaves :: Tree a -> [a]
 leaves Empty = []
 leaves (Branch x Empty Empty) = [x]
-leaves (Branch x left right) = (leaves left) ++ (leaves right)
+leaves (Branch x left right) = leaves left ++ leaves right
 
 -- |
 -- Problem 62
@@ -56,7 +56,7 @@ leaves (Branch x left right) = (leaves left) ++ (leaves right)
 internals :: Tree a -> [a]
 internals Empty = []
 internals (Branch x Empty Empty) = []
-internals (Branch x left right) = x : ((internals left) ++ (internals right))
+internals (Branch x left right) = x : (internals left ++ internals right)
 
 -- |
 -- Problem 62B
@@ -77,11 +77,11 @@ atLevel :: Tree a -> Int -> [a]
 atLevel t l = go t l 1
   where
     go Empty _ _ = []
-    go (Branch x Empty Empty) l curr = if l == curr then [x] else []
+    go (Branch x Empty Empty) l curr = [x | l == curr]
     go (Branch x left right) l curr =
       if l == curr
         then [x]
-        else (go left l (curr + 1)) ++ (go right l (curr + 1))
+        else go left l (curr + 1) ++ go right l (curr + 1)
 
 -- |
 -- Problem 63
