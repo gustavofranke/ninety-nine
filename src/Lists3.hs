@@ -190,7 +190,7 @@ rndPermu xs = map (\f -> xs !! (f - 1)) func
 lsort :: [[a]] -> [[a]]
 lsort xxs = map fst $ sortBy sortTuple $ map (\xs -> (xs, length xs)) xxs
   where
-    sortTuple (a1, b1) (a2, b2)
+    sortTuple (_, b1) (_, b2)
       | b1 > b2 = GT
       | b1 < b2 = LT
       | b1 == b2 = EQ

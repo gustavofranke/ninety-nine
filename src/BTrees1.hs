@@ -11,6 +11,7 @@ data Tree a = Empty | Branch a (Tree a) (Tree a)
 -- consists of either an Empty node,
 -- or a Branch containing one value of type a with exactly two subtrees of type a.
 -- Given this definition, the tree in the diagram above would be represented as:
+tree1 :: Tree Char
 tree1 =
   Branch
     'a'
@@ -30,9 +31,11 @@ tree1 =
     )
 
 -- | Since a "leaf" node is a branch with two empty subtrees, it can be useful to define a shorthand function:
+leaf :: a -> Tree a
 leaf x = Branch x Empty Empty
 
 -- | Then the tree diagram above could be expressed more simply as:
+tree1' :: Tree Char
 tree1' =
   Branch
     'a'
@@ -53,12 +56,15 @@ tree1' =
 
 -- | Other examples of binary trees:
 -- A binary tree consisting of a root node only
+tree2 :: Tree Char
 tree2 = Branch 'a' Empty Empty
 
 -- | An empty binary tree
+tree3 :: Tree a
 tree3 = Empty
 
 -- | A tree of integers
+tree4 :: Tree Integer
 tree4 =
   Branch
     1
@@ -196,11 +202,11 @@ mirror :: Tree a -> Tree a -> Bool
 mirror Empty Empty = True
 mirror _ Empty = False
 mirror Empty _ = False
-mirror (Branch x leftx rightx) (Branch y lefty righty) = mirror leftx righty && mirror lefty rightx
+mirror (Branch _ leftx rightx) (Branch _ lefty righty) = mirror leftx righty && mirror lefty rightx
 
 symmetric :: Tree a -> Bool
 symmetric Empty = True
-symmetric (Branch x left right) = mirror left right
+symmetric (Branch _ left right) = mirror left right
 
 -- |
 -- Problem 57

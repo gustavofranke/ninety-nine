@@ -31,12 +31,12 @@ myLast' x = (head . reverse) x
 -- (*) Find the last but one element of a list.
 myButLast :: [a] -> a
 myButLast [] = error "error!"
-myButLast [q] = error "error!"
+myButLast [_] = error "error!"
 myButLast x = (last . init) x
 
 myButLast' :: [a] -> a
 myButLast' [] = error "error!"
-myButLast' [q] = error "error!"
+myButLast' [_] = error "error!"
 myButLast' x = (head . reverse . init) x
 
 -- |

@@ -16,8 +16,10 @@ newtype Adjac a = Adjac [(a, [a])] deriving (Show, Eq)
 --       \  /         g --- h
 --        f --- k
 -- @
+graph1 :: Graph Char
 graph1 = Graph ['b', 'c', 'd', 'f', 'g', 'h', 'k'] [('b', 'c'), ('b', 'f'), ('c', 'f'), ('f', 'k'), ('g', 'h')]
 
+adjac1 :: Adjac Char
 adjac1 = Adjac [('b', "cf"), ('c', "bf"), ('d', ""), ('f', "bck"), ('g', "h"), ('h', "g"), ('k', "f")]
 
 -- |

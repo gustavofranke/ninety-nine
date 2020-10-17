@@ -17,15 +17,19 @@ module MTrees where
 data MTree a = Node a [MTree a] deriving (Eq, Show)
 
 -- Some example trees:
-
+mtree1 :: MTree Char
 mtree1 = Node 'a' []
 
+mtree2 :: MTree Char
 mtree2 = Node 'a' [Node 'b' []]
 
+mtree3 :: MTree Char
 mtree3 = Node 'a' [Node 'b' [Node 'c' []]]
 
+mtree4 :: MTree Char
 mtree4 = Node 'b' [Node 'd' [], Node 'e' []]
 
+mtree5 :: MTree Char
 mtree5 =
   Node
     'a'

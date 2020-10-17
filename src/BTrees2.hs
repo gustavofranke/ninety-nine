@@ -19,7 +19,7 @@ import BTrees1
 countLeaves :: Tree a -> Int
 countLeaves Empty = 0
 countLeaves (Branch _ Empty Empty) = 1
-countLeaves (Branch x left right) = countLeaves left + countLeaves right
+countLeaves (Branch _ left right) = countLeaves left + countLeaves right
 
 -- |
 -- Problem 61A
@@ -37,7 +37,7 @@ countLeaves (Branch x left right) = countLeaves left + countLeaves right
 leaves :: Tree a -> [a]
 leaves Empty = []
 leaves (Branch x Empty Empty) = [x]
-leaves (Branch x left right) = leaves left ++ leaves right
+leaves (Branch _ left right) = leaves left ++ leaves right
 
 -- |
 -- Problem 62
@@ -55,7 +55,7 @@ leaves (Branch x left right) = leaves left ++ leaves right
 -- [1,2]
 internals :: Tree a -> [a]
 internals Empty = []
-internals (Branch x Empty Empty) = []
+internals (Branch _ Empty Empty) = []
 internals (Branch x left right) = x : (internals left ++ internals right)
 
 -- |
