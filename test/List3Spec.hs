@@ -33,7 +33,9 @@ spec = do
     it "can rndPermu \"abcdef\"" $ do
       Set.fromList (rndPermu "abcdef") `shouldBe` Set.fromList "abcdef"
 
--- describe "Problem 28" $ do
-
+  describe "Problem 28" $ do
+    it "can lsort" $ do
+        lsort ["abc","de","fgh","de","ijkl","mn","o"] `shouldBe` ["o","de","de","mn","abc","fgh","ijkl"]
+        lsort' ["abc","de","fgh","de","ijkl","mn","o"] `shouldBe` ["o","de","de","mn","abc","fgh","ijkl"]
 --   it "can lfsort" $ do
 --     lsort ["abc", "de", "fgh", "de", "ijkl", "mn", "o"] `shouldBe` ["ijkl","o","abc","fgh","de","de","mn"]
