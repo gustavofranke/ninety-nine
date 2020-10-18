@@ -131,7 +131,7 @@ primeFactors x
 -- >>> primeFactorsMult 315
 -- [(3,2),(5,1),(7,1)]
 primeFactorsMult :: Int -> [(Int, Int)]
-primeFactorsMult x = map (\f -> (head f, length f)) $ group (primeFactors x)
+primeFactorsMult x = (\f -> (head f, length f)) <$> group (primeFactors x)
 
 -- |
 -- Problem 37
@@ -244,4 +244,4 @@ goldbach x = (smaPrime, bigPrime)
 -- >>> goldbachList' 4 2000 50
 -- [(73,919),(61,1321),(67,1789),(61,1867)]
 goldbachList :: Int -> Int -> [(Int, Int)]
-goldbachList l u = map goldbach $ filter even [l .. u]
+goldbachList l u = goldbach <$> filter even [l .. u]

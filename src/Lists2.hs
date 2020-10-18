@@ -23,7 +23,7 @@ import Lists1
 data EncodeModified a = Multiple Int a | Single a deriving (Eq, Show)
 
 encodeModified :: Eq a => [a] -> [EncodeModified a]
-encodeModified x = map func (encode x)
+encodeModified x = func <$> encode x
   where
     func t = if fst t == 1 then Single (snd t) else uncurry Multiple t -- uncurry Multiple t == Multiple (fst t) (snd t)
 
@@ -126,7 +126,7 @@ repli' xs i = xs >>= (\a -> take i [a, a ..])
 -- "abdeghk"
 dropEvery :: [a] -> Int -> [a]
 -- dropEvery xs i = map (fst) (filter (\e -> snd e /= i) (zip xs $ cycle [1..i]))
-dropEvery xs i = map fst (filter ((/= i) . snd) (zip xs $ cycle [1 .. i]))
+dropEvery xs i = fst <$> filter ((/= i) . snd) (zip xs $ cycle [1 .. i])
 
 -- |
 -- Problem 17
@@ -167,7 +167,7 @@ split xs i = (take i xs, drop i xs)
 -- >>> slice ['a','b','c','d','e','f','g','h','i','k'] 3 7
 -- "cdefg"
 slice :: [a] -> Int -> Int -> [a]
-slice xs i k = map fst $ filter (\x -> snd x >= i && snd x <= k) $ zip xs [1 ..]
+slice xs i k = fst <$> filter (\x -> snd x >= i && snd x <= k) (zip xs [1 ..])
 
 -- |
 -- Problem 19
@@ -229,4 +229,4 @@ removeAt :: Int -> [a] -> (a, [a])
 --                         map (fst) $ filter (\t -> snd t /= i) (zip xs [1..]))
 removeAt i xs = (head $ func (\t -> snd t == i), func (\t -> snd t /= i))
   where
-    func f = map fst $ filter f (zip xs [1 ..])
+    func f = fst <$> filter f (zip xs [1 ..])

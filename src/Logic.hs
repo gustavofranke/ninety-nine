@@ -64,7 +64,7 @@ equ' a b
   | otherwise = False
 
 table :: (Bool -> Bool -> Bool) -> [[Bool]]
-table f = map (\x -> [fst x, snd x, uncurry f x]) inputs -- uncurry f x == f (fst x) (snd x)
+table f = (\x -> [fst x, snd x, uncurry f x]) <$> inputs -- uncurry f x == f (fst x) (snd x)
   where
     inputs = [(True, True), (True, False), (False, True), (False, False)]
 
@@ -145,14 +145,14 @@ table f = map (\x -> [fst x, snd x, uncurry f x]) inputs -- uncurry f x == f (fs
 -- False False False False
 -- @
 tablen :: Integral b => b -> ([Bool] -> Bool) -> [[Bool]]
-tablen n f = map (\i -> i ++ [f i]) inputs
+tablen n f = (\i -> i ++ [f i]) <$> inputs
   where
     colums = [1 .. n]
     bools = \x -> replicate ((2 ^ x) `div` 2)
     trues = (`bools` True)
     falses = (`bools` False)
     --   inputs = transpose (map (\xs -> take (2 ^ n) (cycle xs)) (map (\x -> trues x ++ falses x) $ reverse colums))
-    inputs = transpose (map (\x -> take (2 ^ n) (cycle (trues x ++ falses x))) $ reverse colums)
+    inputs = transpose ((\x -> take (2 ^ n) (cycle (trues x ++ falses x))) <$> reverse colums)
 
 -- * Main> tablen 3 (\[a,b,c] -> a `and'` (b `or'` c)) -- these set of results seems to be the second bit of the example above
 
@@ -225,7 +225,7 @@ tablen n f = map (\i -> i ++ [f i]) inputs
 -- >>> gray 3
 -- ["000","001","011","010","110","111","101","100"]
 gray :: Integral b => b -> [[Char]]
-gray n = reverse $ transpose (map (\x -> take (2 ^ n) (cycle (trues x ++ falses x))) $ reverse colums)
+gray n = reverse $ transpose ((\x -> take (2 ^ n) (cycle (trues x ++ falses x))) <$> reverse colums)
   where
     colums = [1 .. n]
     bools = \x -> replicate ((2 ^ x) `div` 2)

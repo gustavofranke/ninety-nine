@@ -56,7 +56,7 @@ mtree5 =
 nnodes :: MTree a -> Int
 nnodes (Node _ []) = 1
 nnodes (Node _ [x]) = 1 + nnodes x
-nnodes (Node _ (x : xs)) = 1 + nnodes x + sum (map nnodes xs)
+nnodes (Node _ (x : xs)) = 1 + nnodes x + sum (nnodes <$> xs)
 
 -- |
 -- Problem 70

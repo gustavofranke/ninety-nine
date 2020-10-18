@@ -38,7 +38,7 @@ adjac1 = Adjac [('b', "cf"), ('c', "bf"), ('d', ""), ('f', "bck"), ('g', "h"), (
 -- >>> graphToAdj Graph ['b','c','d','f','g','h','k'] [('b','c'),('b','f'),('c','f'),('f','k'),('g','h')]
 -- Adj [('b', "cf"), ('c', "bf"), ('d', ""), ('f', "bck"), ('g', "h"), ('h', "g"), ('k', "f")]
 graphToAdj :: Eq a => Graph a -> Adjac a
-graphToAdj (Graph nodes edges) = Adjac (map (\n -> (n, getEdges n)) nodes)
+graphToAdj (Graph nodes edges) = Adjac ((\n -> (n, getEdges n)) <$> nodes)
   where
     searchEdges n = filter (\e -> fst e == n || snd e == n) edges
     bothDirects es = foldr (\a b -> fst a : snd a : b) [] es

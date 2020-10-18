@@ -51,7 +51,7 @@ range = enumFromTo
 -- >>> rndSelect "abcdefgh" 3 >>= putStrLn
 -- eda
 rndSelect :: [a] -> Int -> [a]
-rndSelect xs i = map (\f -> xs !! (f - 1)) func
+rndSelect xs i = (\f -> xs !! (f - 1)) <$> func
   where
     func = take i $ nub $ take 10000 $ randomRs (1, length xs) (mkStdGen 100) :: [Int]
 
@@ -85,7 +85,7 @@ diffSelect n m = take n $ randomRs (1, m) (mkStdGen 100) :: [Int]
 -- >>> rndPermu "abcdef"
 -- "badcef"
 rndPermu :: [a] -> [a]
-rndPermu xs = map (\f -> xs !! (f - 1)) func
+rndPermu xs = (\f -> xs !! (f - 1)) <$> func
   where
     func = take len $ nub $ take 10000 $ randomRs (1, len) (mkStdGen 100) :: [Int]
     len = length xs
