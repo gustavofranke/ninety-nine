@@ -1,0 +1,74 @@
+-- | Questions 90 to 94: Miscellaneous problems
+-- | https://wiki.haskell.org/99_questions/90_to_94
+module Miscellaneous1 where
+
+-- |
+-- Problem 90
+--
+-- (**) Eight queens problem
+--
+-- https://en.wikipedia.org/wiki/Eight_queens_puzzle
+--
+-- This is a classical problem in computer science.
+-- The objective is to place eight queens on a chessboard so that no two queens are attacking each other;
+-- i.e., no two queens are in the same row, the same column, or on the same diagonal.
+--
+-- Hint: Represent the positions of the queens as a list of numbers 1..N.
+--
+-- Example: [4,2,7,3,6,8,5,1] means that the queen in the first column is in row 4,
+-- the queen in the second column is in row 2, etc. Use the generate-and-test paradigm.
+--
+-- [4,2,7,3,6,8,5,1]    [1,5,8,6,3,7,2,4]
+-- |.|.|.|.|.|.|.|X|    |X|.|.|.|.|.|.|.|
+-- |.|X|.|.|.|.|.|.|    |.|.|.|.|.|.|X|.|
+-- |.|.|.|X|.|.|.|.|    |.|.|.|.|X|.|.|.|
+-- |X|.|.|.|.|.|.|.|    |.|.|.|.|.|.|.|X|
+-- |.|.|.|.|.|.|X|.|    |.|X|.|.|.|.|.|.|
+-- |.|.|.|.|X|.|.|.|    |.|.|.|X|.|.|.|.|
+-- |.|.|X|.|.|.|.|.|    |.|.|.|.|.|X|.|.|
+-- |.|.|.|.|.|X|.|.|    |.|.|X|.|.|.|.|.|
+--
+-- Example in Haskell:
+--
+-- λ> length (queens 8)
+-- 92
+-- λ> head (queens 8)
+-- [1,5,8,6,3,7,2,4]
+
+-- |
+-- Problem 93
+--
+-- (***) An arithmetic puzzle
+--
+-- Given a list of integer numbers,
+-- find a correct way of inserting arithmetic signs (operators) such that the result is a correct equation.
+--
+-- Example: With the list of numbers [2,3,5,7,11]
+-- we can form the equations 2-3+5+7 = 11 or 2 = (3*5+7)/11 (and ten others!).
+--
+-- Division should be interpreted as operating on rationals, and division by zero should be avoided.
+--
+-- Example in Haskell:
+--
+-- λ> mapM_ putStrLn $ puzzle [2,3,5,7,11]
+-- 2 = 3-(5+7-11)
+-- 2 = 3-5-(7-11)
+-- 2 = 3-(5+7)+11
+-- 2 = 3-5-7+11
+-- 2 = (3*5+7)/11
+-- 2*(3-5) = 7-11
+-- 2-(3-(5+7)) = 11
+-- 2-(3-5-7) = 11
+-- 2-(3-5)+7 = 11
+-- 2-3+5+7 = 11
+-- The other two solutions alluded to in the problem description are dropped by the Haskell solution as trivial variants:
+--
+-- 2 = 3-(5+(7-11))
+-- 2-3+(5+7) = 11
+
+-- '+ - * /
+-- is = [2,3,5,7,11]
+-- (head is, tail is) -- (2,[3,5,7,11])
+-- (last is, init is) -- (11,[2,3,5,7])
+-- permutations ['+' , '-', '*' , '/']
+-- ["+-*/","-+*/","*-+/","-*+/","*+-/","+*-/","/*-+","*/-+","*-/+","/-*+","-/*+","-*/+","/+-*","+/-*","+-/*","/-+*","-/+*","-+/*","/+*-","+/*-","+*/-","/*+-","*/+-","*+/-"]
