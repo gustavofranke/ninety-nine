@@ -17,17 +17,18 @@ spec = do
   describe "Problem 23" $ do
     it "can rndSelect \"abcdefgh\" 3" $ do
       let list = "abcdefgh"
-      let obtained = Set.fromList $ rndSelect list 3
-      let expected = Set.fromList list `Set.intersection` obtained
+          obtained = Set.fromList $ rndSelect list 3
+          expected = Set.fromList list `Set.intersection` obtained
       obtained `shouldBe` expected
 
   describe "Problem 24" $ do
     it "can diffSelect 6 49" $ do
       let first = 6
-      let second = 49
-      length (diffSelect first second) `shouldBe` first
-  -- max (diffSelect first second) `shouldSatisfy` (second <=)
-  -- min (diffSelect first second) `shouldSatisfy` (>= 1)
+          second = 49
+          obtained = diffSelect first second
+      length obtained `shouldBe` first
+      maximum obtained `shouldSatisfy` (<= second)
+      minimum obtained `shouldSatisfy` (>= 1)
 
   describe "Problem 25" $ do
     it "can rndPermu \"abcdef\"" $ do
@@ -35,7 +36,10 @@ spec = do
 
   describe "Problem 28" $ do
     it "can lsort" $ do
-        lsort ["abc","de","fgh","de","ijkl","mn","o"] `shouldBe` ["o","de","de","mn","abc","fgh","ijkl"]
-        lsort' ["abc","de","fgh","de","ijkl","mn","o"] `shouldBe` ["o","de","de","mn","abc","fgh","ijkl"]
+      let input = ["abc", "de", "fgh", "de", "ijkl", "mn", "o"]
+          output = ["o", "de", "de", "mn", "abc", "fgh", "ijkl"]
+      lsort input `shouldBe` output
+      lsort' input `shouldBe` output
+
 --   it "can lfsort" $ do
 --     lsort ["abc", "de", "fgh", "de", "ijkl", "mn", "o"] `shouldBe` ["ijkl","o","abc","fgh","de","de","mn"]
