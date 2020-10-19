@@ -108,44 +108,46 @@ rndPermu xs = (\f -> xs !! (f - 1)) <$> func
 -- >>> combinations 3 "abcdef"
 -- ["abc","abd","abe",...]
 -- combinations :: Int -> [a] -> [[a]]
--- product [1 .. n] `div` (product [1 .. k] * product [1 .. (n - k)])
--- ["ad","ae","af","bd","be","bf","cd","ce","cf"]
--- *Main System.Random Data.List> let a = [ x:y:z:[] | x <- "ab", y <- "cd", z <- "ef"]
--- *Main System.Random Data.List> let b = [ reverse (x:y:z:[]) | x <- "ab", y <- "cd", z <- "ef"]
--- *Main System.Random Data.List> let c = "abc" : "abd" : "abe": "abf" : a ++ b
--- *Main System.Random Data.List> c
--- ["abc","abd","abe","abf","ace","acf","ade","adf","bce","bcf","bde","bdf","eca","fca","eda","fda","ecb","fcb","edb","fdb"]
--- *Main System.Random Data.List> length $ nub $ c
--- 20
--- *Main System.Random Data.List> n
--- 6
--- *Main System.Random Data.List> k
--- 3
--- *Main System.Random Data.List> product [1 .. n] `div` (product [1 .. k] * product [1 .. (n - k)])
--- 20
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _ = [[]]
+combinations n (x : xs) = map (x :) (combinations (n -1) xs) ++ combinations n xs
+combinations _ [] = []
+
+binomCoeffic :: Int -> Int -> Int
+binomCoeffic n k = fact n `div` (fact k * fact (n - k))
+  where
+    fact x = product [1 .. x]
 
 -- |
 -- Problem 27
 --
 -- Group the elements of a set into disjoint subsets.
 --
--- a) In how many ways can a group of 9 people work in 3 disjoint subgroups of 2, 3 and 4 persons? Write a function that generates all the possibilities and returns them in a list.
+-- a) In how many ways can a group of 9 people work in 3 disjoint subgroups of
+-- 2, 3 and 4 persons?
+-- 
+-- Write a function that generates all the possibilities and returns them in a list.
 --
 -- Example:
 --
 -- * (group3 '(aldo beat carla david evi flip gary hugo ida))
 -- ( ( (ALDO BEAT) (CARLA DAVID EVI) (FLIP GARY HUGO IDA) )
 -- ... )
--- b) Generalize the above predicate in a way that we can specify a list of group sizes and the predicate will return a list of groups.
+-- b) Generalize the above predicate in a way that
+-- we can specify a list of group sizes and the predicate will return a list of groups.
 --
 -- Example:
 --
 -- * (group '(aldo beat carla david evi flip gary hugo ida) '(2 2 5))
 -- ( ( (ALDO BEAT) (CARLA DAVID) (EVI FLIP GARY HUGO IDA) )
 -- ... )
--- Note that we do not want permutations of the group members; i.e. ((ALDO BEAT) ...) is the same solution as ((BEAT ALDO) ...). However, we make a difference between ((ALDO BEAT) (CARLA DAVID) ...) and ((CARLA DAVID) (ALDO BEAT) ...).
+-- Note that we do not want permutations of the group members;
+-- i.e. ((ALDO BEAT) ...) is the same solution as ((BEAT ALDO) ...).
+-- 
+-- However, we make a difference between ((ALDO BEAT) (CARLA DAVID) ...) and ((CARLA DAVID) (ALDO BEAT) ...).
 --
--- You may find more about this combinatorial problem in a good book on discrete mathematics under the term "multinomial coefficients".
+-- You may find more about this combinatorial problem in
+-- a good book on discrete mathematics under the term "multinomial coefficients".
 --
 -- Example in Haskell:
 --

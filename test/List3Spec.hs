@@ -34,6 +34,15 @@ spec = do
     it "can rndPermu \"abcdef\"" $ do
       Set.fromList (rndPermu "abcdef") `shouldBe` Set.fromList "abcdef"
 
+  describe "Problem 26" $ do
+    it "can combinations" $ do
+      let n = 3
+          k = "abcdef"
+          obtained = combinations n k
+          expected = ["abc","abd","abe","abf","acd","ace","acf","ade","adf","aef","bcd","bce","bcf","bde","bdf","bef","cde","cdf","cef","def"]
+      obtained `shouldBe` expected
+      length obtained `shouldBe` binomCoeffic (length k) n
+
   describe "Problem 28" $ do
     it "can lsort" $ do
       let input = ["abc", "de", "fgh", "de", "ijkl", "mn", "o"]
