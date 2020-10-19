@@ -42,7 +42,7 @@ encodeModified x = func <$> encode x
 decodeModified :: Eq a => [EncodeModified a] -> [a]
 decodeModified [] = []
 decodeModified ((Single x) : xs) = x : decodeModified xs
-decodeModified ((Multiple i x) : xs) = replicate i x ++ decodeModified xs
+decodeModified ((Multiple i x) : xs) = replicate i x <> decodeModified xs
 
 -- |
 -- Problem 13
@@ -105,7 +105,7 @@ dupli'' xs = xs >>= (\x -> take 2 [x, x ..])
 -- >>> repli "abc" 3
 -- "aaabbbccc"
 repli :: Enum a => [a] -> Int -> [a]
-repli xs i = foldr (\a b -> take i [a, a ..] ++ b) [] xs
+repli xs i = foldr (\a b -> take i [a, a ..] <> b) [] xs
 
 repli' :: Enum a => [a] -> Int -> [a]
 repli' xs i = xs >>= (\a -> take i [a, a ..])
@@ -191,8 +191,8 @@ slice xs i k = fst <$> filter (\x -> snd x >= i && snd x <= k) (zip xs [1 ..])
 -- "ghabcdef"
 rotate :: [a] -> Int -> [a]
 rotate xs i
-  | i > 0 = drop i xs ++ take i xs
-  | i < 0 = drop (y + i) xs ++ take (y + i) xs
+  | i > 0 = drop i xs <> take i xs
+  | i < 0 = drop (y + i) xs <> take (y + i) xs
   | i == 0 = xs
   where
     y = length xs

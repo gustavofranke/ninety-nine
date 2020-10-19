@@ -158,7 +158,9 @@ phi m = foldl (\b a -> (fst a - 1) * fst a ^ ((snd a - 1) * b)) 1 (primeFactorsM
 --
 -- (*) Compare the two methods of calculating Euler's totient function.
 --
--- Use the solutions of problems 34 and 37 to compare the algorithms. Take the number of reductions as a measure for efficiency. Try to calculate phi(10090) as an example.
+-- Use the solutions of problems 34 and 37 to compare the algorithms.
+-- Take the number of reductions as a measure for efficiency.
+-- Try to calculate phi(10090) as an example.
 --
 -- >>> phi 10090
 -- 1008

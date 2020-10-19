@@ -88,5 +88,5 @@ stringToTree (c1 : c2 : cs) = go (c1 : c2 : cs) (Node c1 [])
 -- "afg^^c^bd^e^^^"
 treeToString :: MTree Char -> String
 treeToString (Node c []) = [c, '^']
-treeToString (Node c [x]) = c : treeToString x ++ ['^']
-treeToString (Node c (x : xs)) = c : treeToString x ++ (xs >>= treeToString) ++ ['^']
+treeToString (Node c [x]) = c : treeToString x <> ['^']
+treeToString (Node c (x : xs)) = c : treeToString x <> (xs >>= treeToString) <> ['^']

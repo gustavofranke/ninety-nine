@@ -133,7 +133,7 @@ data NestedList a = Elem a | List [NestedList a]
 flatten :: NestedList a -> [a]
 flatten (List []) = []
 flatten (Elem l) = [l]
-flatten (List (l : ls)) = flatten l ++ flatten (List ls)
+flatten (List (l : ls)) = flatten l <> flatten (List ls)
 
 -- |
 -- Problem 8

@@ -37,7 +37,7 @@ countLeaves (Branch _ left right) = countLeaves left + countLeaves right
 leaves :: Tree a -> [a]
 leaves Empty = []
 leaves (Branch x Empty Empty) = [x]
-leaves (Branch _ left right) = leaves left ++ leaves right
+leaves (Branch _ left right) = leaves left <> leaves right
 
 -- |
 -- Problem 62
@@ -56,7 +56,7 @@ leaves (Branch _ left right) = leaves left ++ leaves right
 internals :: Tree a -> [a]
 internals Empty = []
 internals (Branch _ Empty Empty) = []
-internals (Branch x left right) = x : (internals left ++ internals right)
+internals (Branch x left right) = x : (internals left <> internals right)
 
 -- |
 -- Problem 62B
@@ -81,7 +81,7 @@ atLevel t l = go t l 1
     go (Branch x left right) l curr =
       if l == curr
         then [x]
-        else go left l (curr + 1) ++ go right l (curr + 1)
+        else go left l (curr + 1) <> go right l (curr + 1)
 
 -- |
 -- Problem 63
